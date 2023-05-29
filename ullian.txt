@@ -1,0 +1,61 @@
+Declaração:
+tamanhoMaximo = 10
+fila: Vetor de strings [tamanhoMaximo]
+prioridade: Vetor de inteiros [tamanhoMaximo]
+i: Inteiro
+opcao: Inteiro
+pessoa: String
+atendimento: String
+
+Inicio:
+    para i de 0 até tamanhoMaximo-1 faça:
+        fila[i] <- ""
+        prioridade[i] <- 0
+
+    i <- 0
+
+    repita:
+        ExibirMenu()
+        opcao <- LerOpcao()
+
+        Se opcao igual a 1 então:
+            Se i >= tamanhoMaximo então:
+                ExibirMensagem("A fila de atendimento está cheia. Por favor, tente mais tarde.")
+            Senão:
+                prioridade[i] <- LerPrioridade()
+                pessoa <- LerNome()
+                fila[i] <- pessoa
+                i <- i + 1
+
+        Se opcao igual a 2 então:
+            Se i = 0 então:
+                ExibirMensagem("Não há pessoas na fila de atendimento.")
+            Senão:
+                atendimento <- fila[0]
+                para j de 0 até i-2 faça:
+                    fila[j] <- fila[j+1]
+                    prioridade[j] <- prioridade[j+1]
+                i <- i - 1
+                fila[i] <- ""
+                prioridade[i] <- 0
+                ExibirMensagem("Atendendo: " + atendimento)
+
+        Se opcao igual a 3 então:
+            Se i = 0 então:
+                ExibirMensagem("Não há pessoas na fila de atendimento.")
+            Senão:
+                para j de 0 até i-1 faça:
+                    Se prioridade[j] igual a 1 então:
+                        ExibirMensagem("Prioridade: Preferencial - Nome: " + fila[j])
+                    Senão:
+                        ExibirMensagem("Prioridade: Comum - Nome: " + fila[j])
+
+        Se opcao igual a 4 então:
+            ExibirMensagem("Encerrando o programa.")
+
+        Senão:
+            ExibirMensagem("Opção inválida. Por favor, tente novamente.")
+
+    até opcao igual a 4
+
+Fim
